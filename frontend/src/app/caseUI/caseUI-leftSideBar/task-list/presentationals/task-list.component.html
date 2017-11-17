@@ -1,0 +1,16 @@
+<p-dataTable
+        id="task-list-component_task-table"
+        [value]="taskList"
+        selectionMode="single"
+        [(selection)]="selectedTask"
+        (onRowSelect)="onRowSelect($event)">
+    <p-column field="createTime" header="{{'TASK-RESOURCE_DATE' | translate}}">
+        <ng-template let-col let-task="rowData" pTemplate="body">
+            <span>
+                {{task[col.field] | educamaI18nDateFormat:"shortDate" }}
+            </span>
+        </ng-template>
+    </p-column>
+    <p-column field="name" header="{{'TASK-RESOURCE_TASK-NAME' | translate}}"></p-column>
+    <p-column field="assignee" header="{{'TASK-RESOURCE_ASSIGNEE' | translate}}"></p-column>
+</p-dataTable>
