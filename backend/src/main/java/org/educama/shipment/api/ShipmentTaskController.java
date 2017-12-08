@@ -6,9 +6,7 @@ import org.educama.shipment.api.resource.EnabledTaskListResource;
 import org.educama.shipment.api.resource.ShipmentTaskListResource;
 import org.educama.shipment.boundary.ShipmentTaskBoundaryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -63,11 +61,11 @@ public class ShipmentTaskController {
      *
      */
     @RequestMapping(value = "/enabled/start/{trackingId}/{name}", method = RequestMethod.POST)
-    public ResponseEntity<?> manuallyStartEnabledTask(@PathVariable("trackingId") String trackingId, @PathVariable("name") String name) {
-
+    public EnabledTaskListResource manuallyStartEnabledTask(@PathVariable("trackingId") String trackingId, @PathVariable("name") String name) {
         shipmentTaskBoundaryService.manuallyStartEnabledTask(trackingId, name);
-
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        List<EnabledTaskDS> enabledTask = shipmentTaskBoundaryService.findAllEnabledTasksForShipment(trackingId);
+        EnabledTaskListResource enabledTaskListResource = new EnabledTaskListResource().fromTaskCollection(enabledTask);
+       return enabledTaskListResource;
     }
 
 }

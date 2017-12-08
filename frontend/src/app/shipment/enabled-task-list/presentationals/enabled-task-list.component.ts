@@ -19,7 +19,7 @@ export class EnabledTaskListComponent {
   public selectedEnabledTask: TaskResource = new TaskResource();
 
   @Output()
-  public taskSelectedEvent: EventEmitter<string> = new EventEmitter();
+  public taskSelectedEvent: EventEmitter<TaskResource> = new EventEmitter();
 
 
   constructor(private _store: Store<State>,
@@ -28,6 +28,6 @@ export class EnabledTaskListComponent {
   }
 
   public onRowSelect(event: Event) {
-    this.taskSelectedEvent.emit(this.selectedEnabledTask.trackingId);
+    this.taskSelectedEvent.emit(this.selectedEnabledTask);
   }
 }
