@@ -85,6 +85,7 @@ public class ShipmentController {
      * @returns the updated shipment converted into the API-Model (Resource)
      */
     @RequestMapping(value = "/{trackingId}", method = RequestMethod.PUT)
+
     public ShipmentResource updateShipment(@PathVariable("trackingId") String trackingId,
                                            @Valid @RequestBody SaveShipmentResource saveShipmentResource) {
         Shipment shipment = saveShipmentResource.toShipment();

@@ -2,6 +2,7 @@ package org.educama.shipment.boundary.impl;
 
 import org.camunda.bpm.engine.CaseService;
 import org.camunda.bpm.engine.TaskService;
+import org.camunda.bpm.engine.runtime.CaseExecution;
 import org.camunda.bpm.engine.runtime.CaseInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.educama.shipment.api.datastructure.ShipmentTaskDS;
@@ -42,5 +43,18 @@ public class ShipmentTaskBoundaryServiceImpl implements ShipmentTaskBoundaryServ
             shipmentTasks.add(shipmentTaskDS);
         }
         return shipmentTasks;
+    }
+
+    @Override
+    public void manuallyStartEnabledTask(String trackingId, String name) {
+        Collection<CaseExecution> caseExecutions =
+                caseService.createCaseExecutionQuery().caseInstanceBusinessKey(trackingId).list();
+
+        for (CaseExecution caseExecution: caseExecutions ) {
+            if (caseExecution.getActivityName().equals(name)) {
+                caseService.manuallyStartCaseExecution(caseExecution.getId());
+            }
+
+        }
     }
 }
