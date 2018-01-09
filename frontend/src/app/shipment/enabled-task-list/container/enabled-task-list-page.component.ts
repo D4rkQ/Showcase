@@ -58,7 +58,7 @@ export class EnabledTaskListPageComponent implements OnInit, OnDestroy {
   public onTaskSelectedEvent(taskResource: TaskResource) {
     this._store.dispatch(new RequestManuallyStartEnabledTaskAction(taskResource));
     //store und effect verwenden
-    this._taskService.manuallyStartEnabledTask(taskResource.trackingId, taskResource.name);
+    //this._taskService.manuallyStartEnabledTask(taskResource.trackingId, taskResource.name);
   }
 
   // ***************************************************

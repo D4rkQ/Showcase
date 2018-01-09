@@ -30,4 +30,5 @@ export class EnabledTaskListComponent {
   public onRowSelect(event: Event) {
     this.taskSelectedEvent.emit(this.selectedEnabledTask);
   }
+
 }

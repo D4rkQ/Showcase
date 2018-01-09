@@ -42,7 +42,6 @@ export class CustomerCaptureEffect {
         .map((customerResource: CustomerResource) => new PutCustomerSuccessfulAction(customerResource))
         .catch(() => Observable.of(new PutCustomerFailedAction()));
 
-    // Should this be an "effect"?
     @Effect({dispatch: false}) routeToCustomerList = this._actions
         .ofType(...[actions.POST_CUSTOMER_SUCCESSFUL, actions.PUT_CUSTOMER_SUCCESSFUL])
         .do(() => this._router.navigate(["/customers"]));
