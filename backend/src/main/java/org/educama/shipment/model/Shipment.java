@@ -19,7 +19,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = "trackingId") })
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = "trackingId", name = "unique_flight") })
 public class Shipment extends AbstractPersistable<Long> {
 
     @NotNull
