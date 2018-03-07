@@ -45,4 +45,7 @@ public class Shipment extends AbstractPersistable<Long> {
     @Embedded
     @NotNull
     public Services shipmentServices;
+
+    @NotNull
+    public Flight flight;
 }

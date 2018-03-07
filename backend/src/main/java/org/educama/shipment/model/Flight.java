@@ -2,23 +2,20 @@ package org.educama.shipment.model;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.persistence.UniqueConstraint;
-import javax.persistence.Table;
-import java.time.Instant;
 
 /**
  * This represents the flight entity used for database persistence.
  */
+
+// @Table(uniqueConstraints = { @UniqueConstraint(columnNames = "flightNumber") })
 @SuppressWarnings("serial")
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = "flightNumber") })
 public class Flight extends AbstractPersistable<Long> {
 
+    // @Column(unique = true)
     @NotNull
-    @Column(unique = true)
     public String flightNumber;
 
     @NotNull
@@ -31,10 +28,10 @@ public class Flight extends AbstractPersistable<Long> {
     public String destinationAirport;
 
     @NotNull
-    public Instant departureTime;
+    public String departureTime;
 
     @NotNull
-    public Instant destinationTime;
+    public String destinationTime;
 
     @NotNull
     public double price;
@@ -48,7 +45,7 @@ public class Flight extends AbstractPersistable<Long> {
     }
 
     public Flight(String flightNumber, String airline, String departureAirport, String destinationAirport,
-                  Instant departureTime, Instant destinationTime, double price) {
+                  String departureTime, String destinationTime, double price) {
         this.flightNumber = flightNumber;
         this.airline = airline;
         this.departureAirport = departureAirport;
