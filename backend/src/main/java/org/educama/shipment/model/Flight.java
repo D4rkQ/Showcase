@@ -1,57 +1,25 @@
 package org.educama.shipment.model;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Embeddable;
 
 /**
- * This represents the flight entity used for database persistence.
+ * This represents the address entity used for database persistence.
  */
+@Embeddable
+public class Flight {
 
-// @Table(uniqueConstraints = { @UniqueConstraint(columnNames = "flightNumber") })
-@SuppressWarnings("serial")
-@Entity
-public class Flight extends AbstractPersistable<Long> {
-
-    // @Column(unique = true)
-    @NotNull
-    public String flightNumber;
-
-    @NotNull
-    public String airline;
-
-    @NotNull
-    public String departureAirport;
-
-    @NotNull
-    public String destinationAirport;
-
-    @NotNull
-    public String departureTime;
-
-    @NotNull
-    public String destinationTime;
-
-    @NotNull
-    public double price;
+    public String  flightNumber;
 
 
     /**
      * Constructor for JPA.
      */
-    protected Flight() {
+    public Flight() {
         //empty
     }
 
-    public Flight(String flightNumber, String airline, String departureAirport, String destinationAirport,
-                  String departureTime, String destinationTime, double price) {
+    public Flight(String flightNumber) {
         this.flightNumber = flightNumber;
-        this.airline = airline;
-        this.departureAirport = departureAirport;
-        this.destinationAirport = destinationAirport;
-        this.departureTime = departureTime;
-        this.destinationTime = destinationTime;
-        this.price = price;
     }
 }
+

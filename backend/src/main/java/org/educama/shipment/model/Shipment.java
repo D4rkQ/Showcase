@@ -19,7 +19,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = "trackingId", name = "unique_flight") })
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = "trackingId") })
 public class Shipment extends AbstractPersistable<Long> {
 
     @NotNull
@@ -46,6 +46,7 @@ public class Shipment extends AbstractPersistable<Long> {
     @NotNull
     public Services shipmentServices;
 
+    @Embedded
     @NotNull
     public Flight flight;
 }

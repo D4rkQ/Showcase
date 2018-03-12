@@ -74,7 +74,6 @@ public class ShipmentBoundaryServiceImpl implements ShipmentBoundaryService {
             shipment.sender = saveShipmentResource.sender;
             shipment.shipmentCargo = saveShipmentResource.shipmentCargo;
             shipment.shipmentServices = saveShipmentResource.shipmentServices;
-            shipment.flight = saveShipmentResource.flight;
             shipment = shipmentRepository.saveAndFlush(shipment);
 
             if (completeShipmentOrderTask.isActive(trackingId) && completeShipmentOrderTask.canBeCompleted(trackingId)) {

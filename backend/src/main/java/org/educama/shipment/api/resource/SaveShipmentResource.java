@@ -20,7 +20,7 @@ public class SaveShipmentResource {
     public CargoDS shipmentCargo;
     public ServicesDS shipmentServices;
     public ClientType customerTypeEnum;
-    public FlightDS flight;
+    public FlightDS shipmentFlight;
 
     /**
      * Convert this instance of API-Model (Resource) to the internal data model.
@@ -33,8 +33,7 @@ public class SaveShipmentResource {
         toConvert.shipmentCargo = shipmentCargo.toCargo();
         toConvert.shipmentServices = shipmentServices.toServices();
         toConvert.customerTypeEnum = customerTypeEnum;
-        toConvert.flight = flight.toFlight();
-
+        toConvert.flight = shipmentFlight.toFlight();
         return toConvert;
     }
 }
