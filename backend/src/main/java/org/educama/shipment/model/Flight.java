@@ -8,7 +8,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Flight {
 
-    public String  flightNumber;
+    public String flightNumber;
 
 
     /**

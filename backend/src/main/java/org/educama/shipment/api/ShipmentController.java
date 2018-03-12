@@ -6,6 +6,7 @@ import org.educama.shipment.api.resource.SaveShipmentResource;
 import org.educama.shipment.api.resource.ShipmentListResource;
 import org.educama.shipment.api.resource.ShipmentResource;
 import org.educama.shipment.boundary.ShipmentBoundaryService;
+import org.educama.shipment.boundary.ShipmentTaskBoundaryService;
 import org.educama.shipment.model.Shipment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,9 @@ public class ShipmentController {
 
     @Autowired
     private CustomerBoundaryService customerService;
+
+    @Autowired
+    ShipmentTaskBoundaryService shipmentTaskBoundaryService;
 
     /**
      * API call to create a shipment.
@@ -93,6 +97,27 @@ public class ShipmentController {
         shipment.sender = sender;
         shipment.receiver = receiver;
         ShipmentResource convertedShipment = shipmentBoundaryService.updateShipment(trackingId, shipment);
+        if (saveShipmentResource.shipmentFlight != null) {
+            convertedShipment = shipmentBoundaryService.addFlightToShipment(trackingId, shipment);
+        }
         return convertedShipment;
     }
+
+    /**
+     * API call to add Flight to shipment.
+     *
+     * @returns the updated shipment converted into the API-Model (Resource)
+     */
+//    @RequestMapping(value = "/{trackingId}", method = RequestMethod.PUT)
+//    public ShipmentResource addFlightToShipment(@PathVariable("trackingId") String trackingId,
+//                                                @Valid @RequestBody SaveShipmentResource saveShipmentResource) {
+//        Shipment shipment = saveShipmentResource.toShipment();
+//        ShipmentResource convertedShipment = shipmentBoundaryService.addFlightToShipment(trackingId, shipment);
+//
+//
+//
+//        return convertedShipment;
+//    }
+
+
 }

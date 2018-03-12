@@ -8,6 +8,7 @@ import org.educama.shipment.control.ShipmentCaseControlService;
 import org.educama.shipment.model.Shipment;
 import org.educama.shipment.process.ShipmentCaseEvaluator;
 import org.educama.shipment.process.tasks.CompleteShipmentOrderTask;
+import org.educama.shipment.process.tasks.OrganizeFlightTask;
 import org.educama.shipment.repository.ShipmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,8 @@ import java.util.UUID;
 public class ShipmentBoundaryServiceImpl implements ShipmentBoundaryService {
 
     private CompleteShipmentOrderTask completeShipmentOrderTask;
+
+    private OrganizeFlightTask organizeFlightTask;
 
     private ShipmentRepository shipmentRepository;
 
@@ -78,6 +81,25 @@ public class ShipmentBoundaryServiceImpl implements ShipmentBoundaryService {
 
             if (completeShipmentOrderTask.isActive(trackingId) && completeShipmentOrderTask.canBeCompleted(trackingId)) {
                 completeShipmentOrderTask.complete(trackingId);
+                shipmentCaseEvaluator.reevaluateCase(trackingId);
+            }
+
+            ShipmentResource convertedShipment = new ShipmentResource().fromShipment(shipment);
+            return convertedShipment;
+        }
+    }
+
+    @Override
+    public ShipmentResource addFlightToShipment(String trackingId, Shipment saveShipmentResource) {
+        Shipment shipment = shipmentRepository.findOneBytrackingId(trackingId);
+        if (shipment == null) {
+            throw new ResourceNotFoundException("Shipment not found");
+        } else {
+            shipment.shipmentFlight = saveShipmentResource.shipmentFlight;
+            shipment = shipmentRepository.saveAndFlush(shipment);
+
+            if (organizeFlightTask.isActive(trackingId) && organizeFlightTask.canBeCompleted(trackingId)) {
+                organizeFlightTask.complete(trackingId);
                 shipmentCaseEvaluator.reevaluateCase(trackingId);
             }
 
