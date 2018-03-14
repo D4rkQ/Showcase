@@ -14,6 +14,7 @@ import {RequestTasksForShipmentAction} from "../../shipment-common/store/tasks/t
 import {RequestCompletedTaskForShipmentAction} from "../../shipment-common/store/completed-tasks/completed-task-list-page.actions";
 import {ResetShipmentCaptureSliceAction} from "../../shipment-common/store/shipments/shipment-capture-page.actions";
 import {RequestSingleShipment} from "../../shipment-common/store/shipments/shipment-list-page.actions";
+import {Flight} from "../../shipment-common/api/datastructures/party.datastructure";
 
 @Component({
   selector: "educama-shipment-capture-page",
@@ -106,6 +107,7 @@ export class ShipmentCapturePageComponent implements OnInit, OnDestroy {
     shipment.shipmentCargo = saveShipmentEvent.shipmentCargo;
     shipment.shipmentServices = saveShipmentEvent.shipmentServices;
     shipment.trackingId = saveShipmentEvent.trackingId;
+    shipment.shipmentFlight = new Flight();
     return shipment;
   }
 
