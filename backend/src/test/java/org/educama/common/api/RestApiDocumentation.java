@@ -257,13 +257,7 @@ public class RestApiDocumentation {
                                 fieldWithPath("shipmentServices.importCustomsClearance").description("Is true if the shipment has to pay customs for import"),
                                 fieldWithPath("shipmentServices.onCarriage").description("Is true if additional actions have to take place after the shipment"),
                                 fieldWithPath("shipmentFlight").description("Includes information about the shipmentFlight"),
-                                fieldWithPath("shipmentFlight.flightNumber").description("Includes Flight information for the Shipment"),
-                                fieldWithPath("shipmentFlight.airline").description("The operating airline"),
-                                fieldWithPath("shipmentFlight.departureAirport").description("The departure airport"),
-                                fieldWithPath("shipmentFlight.destinationAirport").description("The destination airport"),
-                                fieldWithPath("shipmentFlight.departureTime").description("The time of departure"),
-                                fieldWithPath("shipmentFlight.destinationTime").description("The time of destination"),
-                                fieldWithPath("shipmentFlight.price").description("The price of the shipmentFlight")),
+                                fieldWithPath("shipmentFlight.flightNumber").description("Includes Flight information for the Shipment")),
                         responseFields(fieldDescriptorShipmentResource)));
 }
 
@@ -488,13 +482,7 @@ public class RestApiDocumentation {
         shipment.put("shipmentServices", services);
 
         Map<String, Object> flight = new LinkedHashMap<>();
-        flight.put("flightNumber", "1234");
-        flight.put("airline", "Air Berlin");
-        flight.put("departureAirport", "Stuttgart");
-        flight.put("destinationAirport", "Berlin");
-        flight.put("departureTime", "1999-11-27 15:49:37,459");
-        flight.put("destinationTime", "1999-11-27 15:49:37,459");  // 2014-04-28T10:20:08.489Z
-        flight.put("price", "100.0");
+        flight.put("flightNumber", "1223134");
         shipment.put("shipmentFlight", flight);
 
         return shipment;

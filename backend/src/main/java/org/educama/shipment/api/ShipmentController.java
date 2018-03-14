@@ -97,27 +97,7 @@ public class ShipmentController {
         shipment.sender = sender;
         shipment.receiver = receiver;
         ShipmentResource convertedShipment = shipmentBoundaryService.updateShipment(trackingId, shipment);
-        if (saveShipmentResource.shipmentFlight != null) {
-            convertedShipment = shipmentBoundaryService.addFlightToShipment(trackingId, shipment);
-        }
+        convertedShipment = shipmentBoundaryService.addFlightToShipment(trackingId, shipment);
         return convertedShipment;
     }
-
-    /**
-     * API call to add Flight to shipment.
-     *
-     * @returns the updated shipment converted into the API-Model (Resource)
-     */
-//    @RequestMapping(value = "/{trackingId}", method = RequestMethod.PUT)
-//    public ShipmentResource addFlightToShipment(@PathVariable("trackingId") String trackingId,
-//                                                @Valid @RequestBody SaveShipmentResource saveShipmentResource) {
-//        Shipment shipment = saveShipmentResource.toShipment();
-//        ShipmentResource convertedShipment = shipmentBoundaryService.addFlightToShipment(trackingId, shipment);
-//
-//
-//
-//        return convertedShipment;
-//    }
-
-
 }

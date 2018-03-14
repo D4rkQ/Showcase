@@ -9,7 +9,8 @@ import javax.persistence.Embeddable;
 public class Flight {
 
     public String flightNumber;
-
+    public double price;
+    public String departureTime;
 
     /**
      * Constructor for JPA.
@@ -18,8 +19,11 @@ public class Flight {
         //empty
     }
 
-    public Flight(String flightNumber) {
+    public Flight(String flightNumber, double price, String departureTime) {
         this.flightNumber = flightNumber;
+        this.price = price;
+        this.departureTime = departureTime;
+
     }
 }
 

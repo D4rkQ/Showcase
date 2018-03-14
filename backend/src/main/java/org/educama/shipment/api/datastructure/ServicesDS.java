@@ -13,7 +13,7 @@ public class ServicesDS {
 
     public boolean exportCustomsClearance;
 
-    public boolean flight;
+    public boolean flightService;
 
     public boolean importInsurance;
 
@@ -32,7 +32,7 @@ public class ServicesDS {
         this.preCarriage = services.preCarriage;
         this.exportInsurance = services.exportInsurance;
         this.exportCustomsClearance = services.exportCustomsClearance;
-        this.flight = services.flight;
+        this.flightService = services.flight;
         this.importInsurance = services.importInsurance;
         this.importCustomsClearance = services.importCustomsClearance;
         this.onCarriage = services.onCarriage;
@@ -42,14 +42,14 @@ public class ServicesDS {
         this.preCarriage = preCarriage;
         this.exportInsurance = exportInsurance;
         this.exportCustomsClearance = exportCustomsClearance;
-        this.flight = flight;
+        this.flightService = flight;
         this.importInsurance = importInsurance;
         this.importCustomsClearance = importCustomsClearance;
         this.onCarriage = onCarriage;
     }
 
     public Services toServices() {
-        return new Services(this.preCarriage, this.exportInsurance, this.exportCustomsClearance, this.flight, this.importInsurance, this.importCustomsClearance, this.onCarriage);
+        return new Services(this.preCarriage, this.exportInsurance, this.exportCustomsClearance, this.flightService, this.importInsurance, this.importCustomsClearance, this.onCarriage);
     }
 
 }
