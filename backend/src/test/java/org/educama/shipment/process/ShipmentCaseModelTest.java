@@ -211,7 +211,7 @@ public class ShipmentCaseModelTest extends AbstractProcessEngineRuleTest {
                 .caseInstanceBusinessKey(shipment.trackingId).singleResult().isEnabled());
 
         // Stage 'PlanItem_HumanTask_CreateInvoice' is available?
-        assertFalse(processEngine().getCaseService().createCaseExecutionQuery()
+        assertTrue(processEngine().getCaseService().createCaseExecutionQuery()
                 .activityId(ShipmentCaseConstants.PLAN_ITEM_HUMAN_TASK_CREATE_INVOICE)
                 .caseInstanceBusinessKey(shipment.trackingId).singleResult().isAvailable());
 
