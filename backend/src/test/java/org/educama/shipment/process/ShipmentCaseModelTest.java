@@ -66,7 +66,7 @@ public class ShipmentCaseModelTest extends AbstractProcessEngineRuleTest {
 
         shipment.shipmentCargo = new Cargo(null, 2.0, 123.0, "Don't Panic!", true);
         shipment.shipmentServices = new Services(false, false, false, true, false, false, true);
-        shipment.shipmentFlight = new Flight("10243", 100.12, "10:45");
+        shipment.shipmentFlight = new Flight("10243", "LH", "FRA", "STR", "10;45", "12:45", 100.12);
         shipmentRepository.save(shipment);
 
         this.shipmentId = shipment.getId();

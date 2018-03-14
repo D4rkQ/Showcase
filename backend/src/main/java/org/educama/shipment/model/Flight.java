@@ -9,8 +9,13 @@ import javax.persistence.Embeddable;
 public class Flight {
 
     public String flightNumber;
-    public double price;
+    public String airline;
+    public String departureAirport;
+    public String destinationAirport;
     public String departureTime;
+    public String destinationTime;
+    public double price;
+
 
     /**
      * Constructor for JPA.
@@ -19,11 +24,14 @@ public class Flight {
         //empty
     }
 
-    public Flight(String flightNumber, double price, String departureTime) {
+    public Flight(String flightNumber, String airline, String departureAirport, String destinationAirport, String departureTime, String destinationTime, double price) {
         this.flightNumber = flightNumber;
-        this.price = price;
+        this.airline = airline;
+        this.departureAirport = departureAirport;
+        this.destinationAirport = destinationAirport;
         this.departureTime = departureTime;
-
+        this.destinationTime = destinationTime;
+        this.price = price;
     }
 }
 
