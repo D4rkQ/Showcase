@@ -27,6 +27,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -247,7 +248,6 @@ public class RestApiDocumentation {
         // Invoice Resource
          fieldDescriptorInvoiceResource = new FieldDescriptor[]{
                  fieldWithPath("invoiceNumber").description("The Number of the invoice"),
-                 fieldWithPath("shipmentId").description("The unique business key of the shipment"),
                  fieldWithPath("invoiceCreationDate").description("The Invoice creation date"),
                  fieldWithPath("preCarriage").description("The price of the pre-carriage"),
                  fieldWithPath("exportInsurance").description("The price of the export insurance"),
@@ -508,13 +508,13 @@ public class RestApiDocumentation {
                                             .andWithPrefix("tasks[].", fieldDescriptorCompletedTaskResource))
                     );
     }
+
     @Test
     public void createInvoiceTest() throws Exception {
         createInvoice()
-                .andExpect(status().isCreated()).andDo(
+                .andExpect(status().isOk()).andDo(
                 this.documentationHandler.document(
-                        requestFields(fieldWithPath("invoiceNumber").description("The Number of the invoice"),
-                                fieldWithPath("shipmentId").description("The unique business key of the shipment"),
+                        requestFields(
                                 fieldWithPath("invoiceCreationDate").description("The Invoice creation date"),
                                 fieldWithPath("preCarriage").description("The price of the pre-carriage"),
                                 fieldWithPath("exportInsurance").description("The price of the export insurance"),
@@ -526,9 +526,8 @@ public class RestApiDocumentation {
                                 fieldWithPath("managementFee").description("The price of the management fee"),
                                 fieldWithPath("serviceFee").description("The price of the service fee"),
                                 fieldWithPath("discount").description("The price of the discount")),
-                        responseFields(fieldDescriptorShipmentResource)));
+                        responseFields(fieldDescriptorInvoiceResource)));
     }
-
 
     private ResultActions createShipment() throws Exception {
 
@@ -566,6 +565,16 @@ public class RestApiDocumentation {
 
         JSONObject jsonResult = new JSONObject(result.getResponse().getContentAsString());
         String trackingId = jsonResult.getString("trackingId");
+
+        // Get task 'Organize Flight'
+        CaseExecution organizeFlightOrderCaseExecution = processEngine().getCaseService().createCaseExecutionQuery()
+                .activityId(ShipmentCaseConstants.PLAN_ITEM_HUMAN_TASK_ORGANIZE_FLIGHT)
+                .caseInstanceBusinessKey(trackingId).singleResult();
+
+        // Complete task 'Organize Flight'
+        Task task = processEngine().getTaskService().createTaskQuery()
+                .caseExecutionId(organizeFlightOrderCaseExecution.getId()).singleResult();
+        processEngine().getTaskService().complete(task.getId());
 
         return this.mockMvc.perform(post(ShipmentController.SHIPMENT_RESOURCE_PATH + "/invoice/" + trackingId).contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsBytes(this.createInvoiceResourceHashMap())));
@@ -740,23 +749,17 @@ public class RestApiDocumentation {
     private Map<String, Object> createInvoiceResourceHashMap() throws Exception {
 
         Map<String, Object> Invoice = new LinkedHashMap<>();
-        Map<String, Object> shipmentInvoice = new LinkedHashMap<>();
-
-        shipmentInvoice.put("invoiceNumber", "1234");
-        shipmentInvoice.put("shipmentId", "1023243");
-        shipmentInvoice.put("invoiceCreationDate", "2015-06-02T21:34:33.616Z");
-        shipmentInvoice.put("preCarriage", 50.23);
-        shipmentInvoice.put("exportInsurance", 50.23);
-        shipmentInvoice.put("exportCustomsClearance", 50.23);
-        shipmentInvoice.put("flightPrice", 50.23);
-        shipmentInvoice.put("importInsurance", 50.23);
-        shipmentInvoice.put("importCustomsClearance", 50.23);
-        shipmentInvoice.put("onCarriage", 50.23);
-        shipmentInvoice.put("managementFee", 50.23);
-        shipmentInvoice.put("serviceFee", 50.23);
-        shipmentInvoice.put("discount", 5.23);
-
-        Invoice.put("shipmentInvoice", shipmentInvoice);
+        Invoice.put("invoiceCreationDate", "2015-06-02T21:34:33.616Z");
+        Invoice.put("preCarriage", 50.23);
+        Invoice.put("exportInsurance", 50.23);
+        Invoice.put("exportCustomsClearance", 50.23);
+        Invoice.put("flightPrice", 50.23);
+        Invoice.put("importInsurance", 50.23);
+        Invoice.put("importCustomsClearance", 50.23);
+        Invoice.put("onCarriage", 50.23);
+        Invoice.put("managementFee", 50.23);
+        Invoice.put("serviceFee", 50.23);
+        Invoice.put("discount", 5.23);
 
         return Invoice;
 
