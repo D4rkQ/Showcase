@@ -27,6 +27,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -52,6 +53,7 @@ public class RestApiDocumentation {
 
     public static final int PORT = 8081;
     private static final double FLIGHTPRICE = 100.12;
+
 
     @Rule
     public final JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("target/generated-snippets");
@@ -83,6 +85,8 @@ public class RestApiDocumentation {
     private FieldDescriptor[] fieldDescriptorCustomerResource;
 
     private FieldDescriptor[] fieldDescriptorCustomerListResource;
+
+    private FieldDescriptor[] fieldDescriptorInvoiceResource;
 
     @Before
     public void setUp() {
@@ -240,6 +244,24 @@ public class RestApiDocumentation {
                 fieldWithPath("totalPages").description("Number of pages"),
                 fieldWithPath("totalElements").description("Number of entries in response"),
                 fieldWithPath("customers[]").description("An array of customer objects")};
+
+        // Invoice Resource
+         fieldDescriptorInvoiceResource = new FieldDescriptor[]{
+                 fieldWithPath("invoiceNumber").description("The Number of the invoice"),
+                 fieldWithPath("invoiceCreationDate").description("The Invoice creation date"),
+                 fieldWithPath("preCarriage").description("The price of the pre-carriage"),
+                 fieldWithPath("exportInsurance").description("The price of the export insurance"),
+                 fieldWithPath("exportCustomsClearance").description("The price of the export customs clearance"),
+                 fieldWithPath("flightPrice").description("The price of the flight"),
+                 fieldWithPath("importInsurance").description("The price of the import insurance"),
+                 fieldWithPath("importCustomsClearance").description("The price of the import customs clearance"),
+                 fieldWithPath("onCarriage").description("The price of the on-carriage"),
+                 fieldWithPath("managementFee").description("The price of the management fee"),
+                 fieldWithPath("serviceFee").description("The price of the service fee"),
+                 fieldWithPath("discount").description("The price of the discount"),
+
+         };
+
         }
 
     @Test
@@ -487,6 +509,26 @@ public class RestApiDocumentation {
                     );
     }
 
+    @Test
+    public void createInvoiceTest() throws Exception {
+        createInvoice()
+                .andExpect(status().isOk()).andDo(
+                this.documentationHandler.document(
+                        requestFields(
+                                fieldWithPath("invoiceCreationDate").description("The Invoice creation date"),
+                                fieldWithPath("preCarriage").description("The price of the pre-carriage"),
+                                fieldWithPath("exportInsurance").description("The price of the export insurance"),
+                                fieldWithPath("exportCustomsClearance").description("The price of the export customs clearance"),
+                                fieldWithPath("flightPrice").description("The price of the flight"),
+                                fieldWithPath("importInsurance").description("The price of the import insurance"),
+                                fieldWithPath("importCustomsClearance").description("The price of the import customs clearance"),
+                                fieldWithPath("onCarriage").description("The price of the on-carriage"),
+                                fieldWithPath("managementFee").description("The price of the management fee"),
+                                fieldWithPath("serviceFee").description("The price of the service fee"),
+                                fieldWithPath("discount").description("The price of the discount")),
+                        responseFields(fieldDescriptorInvoiceResource)));
+    }
+
     private ResultActions createShipment() throws Exception {
 
         return this.mockMvc.perform(post(ShipmentController.SHIPMENT_RESOURCE_PATH).contentType(MediaType.APPLICATION_JSON)
@@ -515,6 +557,30 @@ public class RestApiDocumentation {
         return this.mockMvc.perform(put(ShipmentController.SHIPMENT_RESOURCE_PATH + "/flight/" + trackingId).contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsBytes(this.addFlightToShipmentResourceHashMap())));
     }
+
+    private ResultActions createInvoice() throws Exception {
+
+
+        MvcResult result = createShipment().andExpect(status().isCreated()).andReturn();
+
+        JSONObject jsonResult = new JSONObject(result.getResponse().getContentAsString());
+        String trackingId = jsonResult.getString("trackingId");
+
+        // Get task 'Organize Flight'
+        CaseExecution organizeFlightOrderCaseExecution = processEngine().getCaseService().createCaseExecutionQuery()
+                .activityId(ShipmentCaseConstants.PLAN_ITEM_HUMAN_TASK_ORGANIZE_FLIGHT)
+                .caseInstanceBusinessKey(trackingId).singleResult();
+
+        // Complete task 'Organize Flight'
+        Task task = processEngine().getTaskService().createTaskQuery()
+                .caseExecutionId(organizeFlightOrderCaseExecution.getId()).singleResult();
+        processEngine().getTaskService().complete(task.getId());
+
+        return this.mockMvc.perform(post(ShipmentController.SHIPMENT_RESOURCE_PATH + "/invoice/" + trackingId).contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsBytes(this.createInvoiceResourceHashMap())));
+
+    }
+
 
     private String createCustomer(String name) throws Exception {
         MvcResult result = this.mockMvc
@@ -680,4 +746,22 @@ public class RestApiDocumentation {
         return "/" + customer.uuid;
     }
 
+    private Map<String, Object> createInvoiceResourceHashMap() throws Exception {
+
+        Map<String, Object> Invoice = new LinkedHashMap<>();
+        Invoice.put("invoiceCreationDate", "2015-06-02T21:34:33.616Z");
+        Invoice.put("preCarriage", 50.23);
+        Invoice.put("exportInsurance", 50.23);
+        Invoice.put("exportCustomsClearance", 50.23);
+        Invoice.put("flightPrice", 50.23);
+        Invoice.put("importInsurance", 50.23);
+        Invoice.put("importCustomsClearance", 50.23);
+        Invoice.put("onCarriage", 50.23);
+        Invoice.put("managementFee", 50.23);
+        Invoice.put("serviceFee", 50.23);
+        Invoice.put("discount", 5.23);
+
+        return Invoice;
+
+    }
 }

@@ -1,295 +1,427 @@
 {
-	"id": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-	"name": "Educama-Backend",
-	"description": "",
-	"order": [],
-	"folders": [
+	"info": {
+		"_postman_id": "b5a89227-3bc7-45a8-9323-1c63a3c11390",
+		"name": "Educama-Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
 		{
-			"id": "7215fe81-8062-a0bd-fb69-668d1e3ed03f",
 			"name": "Customers",
-			"description": "",
-			"order": [
-				"c7e7915c-e65f-c70b-3a81-e0771b1eae33",
-				"852170f4-90db-9bea-dde6-795fc4f72b5d",
-				"bb3a1059-3d4f-753f-8089-2c9c7a960345",
-				"b44e2ac7-1b8a-4adc-205e-6b599f46505d",
-				"08bae737-cc7b-fdb8-c72f-7e5736da8ea1",
-				"3a9b1909-b27b-3677-47a8-fdf51c328a07",
-				"e598ee1f-241d-5c4e-3781-0588b2abf113",
-				"3912c1bb-f7f3-d24e-547f-a4e969370272"
-			],
-			"owner": "3327557",
-			"collectionId": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"folders_order": []
+			"description": null,
+			"item": [
+				{
+					"name": "Create Customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Peter Kutschera\",\n\t\"address\": {\n  \t\t\"street\": \"Dieselstr\",\n  \t\t\"streetNo\": \"18/1\",\n  \t\t\"zipCode\": \"70771\",\n  \t\t\"city\": \"Leinfelden-Echterdingen\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8091/educama/v1/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"educama",
+								"v1",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Customer (second one)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Lars Dülfer\",\n\t\"address\": {\n  \t\t\"street\": \"Dieselstr\",\n  \t\t\"streetNo\": \"18/1\",\n  \t\t\"zipCode\": \"70771\",\n  \t\t\"city\": \"Leinfelden-Echterdingen\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8091/educama/v1/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"educama",
+								"v1",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"uuid\": \"2409fade-222b-401a-9594-f30873b7f229\",\n  \"name\": \"Peter Kutschera\",\n  \"address\": {\n    \"street\": \"Dieselstr\",\n    \"streetNo\": \"18/2\",\n    \"zipCode\": \"70771\",\n    \"city\": \"Leinfelden-Echterdingen\"\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8091/educama/v1/customers/2409fade-222b-401a-9594-f30873b7f229",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"educama",
+								"v1",
+								"customers",
+								"2409fade-222b-401a-9594-f30873b7f229"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8091/educama/v1/customers/f4ed6c6e-4e72-4568-a964-276bfb2fcfeb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"educama",
+								"v1",
+								"customers",
+								"f4ed6c6e-4e72-4568-a964-276bfb2fcfeb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8091/educama/v1/customers/d92b5280-738e-4363-bb5a-4b7d1954ba53",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"educama",
+								"v1",
+								"customers",
+								"d92b5280-738e-4363-bb5a-4b7d1954ba53"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Customers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8091/educama/v1/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"educama",
+								"v1",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LIst all Customers (paged)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8091/educama/v1/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"educama",
+								"v1",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Suggestions for Customers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8091/educama/v1/customers/suggestions?term=p",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"educama",
+								"v1",
+								"customers",
+								"suggestions"
+							],
+							"query": [
+								{
+									"key": "term",
+									"value": "p"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
-			"id": "6ea67a1c-d94b-1273-9f0d-a582ecd1d721",
 			"name": "Shipments",
-			"description": "",
-			"order": [
-				"e3e8573d-a031-5e3f-8093-08c15e7c32df",
-				"8b85d2d8-e715-e63e-6450-dae2eac72a2a"
-			],
-			"owner": "3327557",
-			"collectionId": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"folders_order": []
+			"description": null,
+			"item": [
+				{
+					"name": "Create Shipment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"customer\": \"NovaTec Consulting GmbH\",\n  \"senderAddress\": \"Dieselstr. 18/1, 70771 Leinfelden-Echterdingen\",\n  \"receiverAddress\": \"Santa Claus Main Post Office, FI-96930 Arctic Circle, Finland\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8091/educama/v1/shipments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"educama",
+								"v1",
+								"shipments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Shipments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8091/educama/v1/shipments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"educama",
+								"v1",
+								"shipments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Invoice",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n  \r\n  \"invoiceCreationDate\":\"1995-10-23T10:12:35Z\",\r\n  \"preCarriage\":131.2,\r\n  \"exportInsurance\":1231.1,\r\n  \"exportCustomsClearance\":1231.1,\r\n  \"flightPrice\":100.0,\r\n  \"importInsurance\":1231.1,\r\n  \"importCustomsClearance\":11.1,\r\n  \"onCarriage\":100.0,\r\n  \"managementFee\":131.0,\r\n  \"serviceFee\":100.0,\r\n  \"discount\":12.1\r\n  \r\n  }"
+						},
+						"url": {
+							"raw": "http://localhost:8081/educama/v1/shipments/invoice/1a03e950-bdb7-46cd-9fa3-edb154de54f3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"educama",
+								"v1",
+								"shipments",
+								"invoice",
+								"1a03e950-bdb7-46cd-9fa3-edb154de54f3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
-			"id": "0647dd42-94b6-407b-077c-afb5962d1e55",
 			"name": "Tasks",
-			"description": "",
-			"order": [
-				"19fad0a4-ca2d-1ab3-e9e3-09b785743404",
-				"687beaf3-eb92-0554-2251-ce6093688a27"
-			],
-			"owner": "3327557",
-			"collectionId": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"folders_order": []
-		}
-	],
-	"folders_order": [
-		"7215fe81-8062-a0bd-fb69-668d1e3ed03f",
-		"6ea67a1c-d94b-1273-9f0d-a582ecd1d721",
-		"0647dd42-94b6-407b-077c-afb5962d1e55"
-	],
-	"timestamp": 0,
-	"owner": "3327557",
-	"public": false,
-	"requests": [
-		{
-			"id": "08bae737-cc7b-fdb8-c72f-7e5736da8ea1",
-			"headers": "Content-Type: application/json\n",
-			"url": "http://localhost:8081/educama/v1/customers/d92b5280-738e-4363-bb5a-4b7d1954ba53",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "params",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1486929212998,
-			"name": "Get Customer",
-			"description": "",
-			"collectionId": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"responses": [],
-			"folder": "7215fe81-8062-a0bd-fb69-668d1e3ed03f",
-			"collection_id": "13618b58-38d6-4374-bbee-cc8a5764e42e"
-		},
-		{
-			"id": "19fad0a4-ca2d-1ab3-e9e3-09b785743404",
-			"headers": "Content-Type: application/json\n",
-			"url": "http://localhost:8081/educama/v1/tasks",
-			"pathVariables": {},
-			"preRequestScript": null,
-			"method": "GET",
-			"collectionId": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"data": [],
-			"dataMode": "params",
-			"name": "List All Tasks",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1486487362716,
-			"version": 2,
-			"responses": [],
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"folder": "0647dd42-94b6-407b-077c-afb5962d1e55",
-			"collection_id": "13618b58-38d6-4374-bbee-cc8a5764e42e"
-		},
-		{
-			"id": "3912c1bb-f7f3-d24e-547f-a4e969370272",
-			"headers": "Content-Type: application/json\n",
-			"url": "http://localhost:8081/educama/v1/customers/suggestions?term=p",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "params",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1486935400718,
-			"name": "List Suggestions for Customers",
-			"description": "",
-			"collectionId": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"responses": [],
-			"folder": "7215fe81-8062-a0bd-fb69-668d1e3ed03f",
-			"collection_id": "13618b58-38d6-4374-bbee-cc8a5764e42e"
-		},
-		{
-			"id": "3a9b1909-b27b-3677-47a8-fdf51c328a07",
-			"headers": "Content-Type: application/json\n",
-			"url": "http://localhost:8081/educama/v1/customers",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "params",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1486933914566,
-			"name": "List All Customers",
-			"description": "",
-			"collectionId": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"responses": [],
-			"folder": "7215fe81-8062-a0bd-fb69-668d1e3ed03f",
-			"collection_id": "13618b58-38d6-4374-bbee-cc8a5764e42e"
-		},
-		{
-			"id": "687beaf3-eb92-0554-2251-ce6093688a27",
-			"headers": "",
-			"headerData": [],
-			"url": "http://localhost:8081/educama/v1/tasks/completed/f086e52f-817b-455b-ac70-bfd6e78d4ac7",
-			"queryParams": [],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"preRequestScript": null,
-			"method": "GET",
-			"collectionId": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"data": null,
-			"dataMode": "params",
-			"name": "List All Completed Tasks For Shipment",
-			"description": "The request lists all completed tasks for a Shipment.",
-			"descriptionFormat": "html",
-			"time": 1513702995414,
-			"version": 2,
-			"responses": [],
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"folder": "0647dd42-94b6-407b-077c-afb5962d1e55"
-		},
-		{
-			"id": "852170f4-90db-9bea-dde6-795fc4f72b5d",
-			"name": "Create Customer (second one)",
-			"description": "",
-			"collectionId": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"method": "POST",
-			"headers": "Content-Type: application/json",
-			"dataMode": "raw",
-			"data": [],
-			"rawModeData": "{\n\t\"name\": \"Lars Dülfer\",\n\t\"address\": {\n  \t\t\"street\": \"Dieselstr\",\n  \t\t\"streetNo\": \"18/1\",\n  \t\t\"zipCode\": \"70771\",\n  \t\t\"city\": \"Leinfelden-Echterdingen\"\n\t}\n}",
-			"pathVariables": {},
-			"url": "http://localhost:8081/educama/v1/customers",
-			"responses": [],
-			"folder": "7215fe81-8062-a0bd-fb69-668d1e3ed03f",
-			"collection_id": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"preRequestScript": "",
-			"tests": ""
-		},
-		{
-			"id": "8b85d2d8-e715-e63e-6450-dae2eac72a2a",
-			"name": "List All Shipments",
-			"description": "",
-			"collectionId": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"method": "GET",
-			"headers": "Content-Type: application/json",
-			"data": [],
-			"rawModeData": "",
-			"pathVariables": {},
-			"url": "http://localhost:8081/educama/v1/shipments",
-			"responses": [],
-			"folder": "6ea67a1c-d94b-1273-9f0d-a582ecd1d721",
-			"collection_id": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"preRequestScript": "",
-			"tests": ""
-		},
-		{
-			"id": "b44e2ac7-1b8a-4adc-205e-6b599f46505d",
-			"headers": "Content-Type: application/json\n",
-			"url": "http://localhost:8081/educama/v1/customers/f4ed6c6e-4e72-4568-a964-276bfb2fcfeb",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "DELETE",
-			"data": [],
-			"dataMode": "params",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1486813373011,
-			"name": "Delete Customer",
-			"description": "",
-			"collectionId": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"responses": [],
-			"folder": "7215fe81-8062-a0bd-fb69-668d1e3ed03f",
-			"collection_id": "13618b58-38d6-4374-bbee-cc8a5764e42e"
-		},
-		{
-			"id": "bb3a1059-3d4f-753f-8089-2c9c7a960345",
-			"headers": "Content-Type: application/json\n",
-			"url": "http://localhost:8081/educama/v1/customers/2409fade-222b-401a-9594-f30873b7f229",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "PUT",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1486812682588,
-			"name": "Update Customer",
-			"description": "",
-			"collectionId": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"responses": [],
-			"folder": "7215fe81-8062-a0bd-fb69-668d1e3ed03f",
-			"rawModeData": "{\n  \"uuid\": \"2409fade-222b-401a-9594-f30873b7f229\",\n  \"name\": \"Peter Kutschera\",\n  \"address\": {\n    \"street\": \"Dieselstr\",\n    \"streetNo\": \"18/2\",\n    \"zipCode\": \"70771\",\n    \"city\": \"Leinfelden-Echterdingen\"\n  }\n}",
-			"collection_id": "13618b58-38d6-4374-bbee-cc8a5764e42e"
-		},
-		{
-			"id": "c7e7915c-e65f-c70b-3a81-e0771b1eae33",
-			"name": "Create Customer",
-			"description": "",
-			"collectionId": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"method": "POST",
-			"headers": "Content-Type: application/json",
-			"dataMode": "raw",
-			"data": [],
-			"rawModeData": "{\n\t\"name\": \"Peter Kutschera\",\n\t\"address\": {\n  \t\t\"street\": \"Dieselstr\",\n  \t\t\"streetNo\": \"18/1\",\n  \t\t\"zipCode\": \"70771\",\n  \t\t\"city\": \"Leinfelden-Echterdingen\"\n\t}\n}",
-			"pathVariables": {},
-			"url": "http://localhost:8081/educama/v1/customers",
-			"responses": [],
-			"folder": "7215fe81-8062-a0bd-fb69-668d1e3ed03f",
-			"collection_id": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"preRequestScript": "",
-			"tests": ""
-		},
-		{
-			"id": "e3e8573d-a031-5e3f-8093-08c15e7c32df",
-			"name": "Create Shipment",
-			"description": "",
-			"collectionId": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"method": "POST",
-			"headers": "Content-Type: application/json",
-			"dataMode": "raw",
-			"data": [],
-			"rawModeData": "{\n  \"customer\": \"NovaTec Consulting GmbH\",\n  \"senderAddress\": \"Dieselstr. 18/1, 70771 Leinfelden-Echterdingen\",\n  \"receiverAddress\": \"Santa Claus Main Post Office, FI-96930 Arctic Circle, Finland\"\n}",
-			"pathVariables": {},
-			"url": "http://localhost:8081/educama/v1/shipments",
-			"responses": [],
-			"folder": "6ea67a1c-d94b-1273-9f0d-a582ecd1d721",
-			"collection_id": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"preRequestScript": "",
-			"tests": ""
-		},
-		{
-			"id": "e598ee1f-241d-5c4e-3781-0588b2abf113",
-			"name": "LIst all Customers (paged)",
-			"description": "",
-			"collectionId": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"method": "GET",
-			"headers": "Content-Type: application/json",
-			"data": [],
-			"rawModeData": "",
-			"pathVariables": {},
-			"url": "http://localhost:8081/educama/v1/customers",
-			"responses": [],
-			"folder": "7215fe81-8062-a0bd-fb69-668d1e3ed03f",
-			"collection_id": "13618b58-38d6-4374-bbee-cc8a5764e42e",
-			"preRequestScript": "",
-			"tests": ""
+			"description": null,
+			"item": [
+				{
+					"name": "List All Tasks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8091/educama/v1/tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"educama",
+								"v1",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Completed Tasks For Shipment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8091/educama/v1/tasks/completed/f086e52f-817b-455b-ac70-bfd6e78d4ac7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"educama",
+								"v1",
+								"tasks",
+								"completed",
+								"f086e52f-817b-455b-ac70-bfd6e78d4ac7"
+							]
+						},
+						"description": "The request lists all completed tasks for a Shipment."
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
