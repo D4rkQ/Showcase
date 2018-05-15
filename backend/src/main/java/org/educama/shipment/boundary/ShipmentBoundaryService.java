@@ -54,6 +54,14 @@ public interface ShipmentBoundaryService {
     Collection<Invoice> getInvoices(String trackingId);
 
     /**
+     * Retrieves one matching invoice for a shipment.
+     *
+     * @param trackingId to get required shipment
+     * @return returns a one matching Invoice
+     */
+    InvoiceResource getInvoice(String trackingId);
+
+    /**
      * Retrieves one shipment and updates it.
      *
      * @param trackingId to get required shipment

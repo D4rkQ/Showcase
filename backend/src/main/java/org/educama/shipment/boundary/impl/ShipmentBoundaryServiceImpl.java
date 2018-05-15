@@ -82,6 +82,14 @@ public class ShipmentBoundaryServiceImpl implements ShipmentBoundaryService {
     }
 
     @Override
+    public InvoiceResource getInvoice(String trackingId) {
+        Shipment shipment = shipmentRepository.findOneBytrackingId(trackingId);
+        Invoice invoice = invoiceRepository.findInvoiceByShipmentId(shipment.getId());
+        InvoiceResource convertedInvoice = new InvoiceResource().fromInvoice(invoice);
+        return convertedInvoice;
+    }
+
+    @Override
     public Collection<Invoice> getInvoices(String trackingId) {
         Shipment shipment = shipmentRepository.findOneBytrackingId(trackingId);
         return invoiceRepository.findInvoicesByShipmentId(shipment.getId());

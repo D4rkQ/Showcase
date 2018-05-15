@@ -108,12 +108,24 @@ public class ShipmentController {
      *
      * @return the result collection converted into the API-Model (Resource)
      */
-    @RequestMapping(value = "invoice/{trackingId}", method = RequestMethod.GET)
+    @RequestMapping(value = "invoices/{trackingId}", method = RequestMethod.GET)
     public InvoiceListResource getInvoices(@PathVariable("trackingId") String trackingId) {
         Collection<Invoice> allInvoices = shipmentBoundaryService.getInvoices(trackingId);
         InvoiceListResource resourceList = new InvoiceListResource().fromInvoiceCollection(allInvoices);
 
         return resourceList;
+    }
+
+    /**
+     * API call to select one invoice matching a shipment.
+     *
+     * @return the result collection converted into the API-Model (Resource)
+     */
+    @RequestMapping(value = "invoice/{trackingId}", method = RequestMethod.GET)
+    public InvoiceResource getInvoice(@PathVariable("trackingId") String trackingId) {
+        InvoiceResource invoice = shipmentBoundaryService.getInvoice(trackingId);
+
+        return invoice;
     }
 
     /**

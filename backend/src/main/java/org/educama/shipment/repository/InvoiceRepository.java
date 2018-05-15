@@ -12,4 +12,5 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
 
     Invoice findOneByInvoiceNumber(String invoiceNumber);
     Collection<Invoice> findInvoicesByShipmentId(long shipmentId);
+    Invoice findInvoiceByShipmentId(long shipmentId);
 }
