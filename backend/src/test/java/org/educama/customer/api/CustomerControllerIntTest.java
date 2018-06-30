@@ -10,10 +10,7 @@ import org.educama.customer.api.resource.assembler.CustomerResourceAssembler;
 import org.educama.customer.boundary.impl.CustomerBoundaryServiceImpl;
 import org.educama.customer.model.Customer;
 import org.educama.customer.repository.CustomerRepository;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -52,6 +49,11 @@ public class CustomerControllerIntTest {
     @Before
     public void setUp() {
         when(repo.save(any(Customer.class))).thenAnswer(answer -> answer.getArgumentAt(0, Customer.class));
+    }
+
+    @After
+    public void cleaup() {
+        repo.deleteAll();
     }
 
     @Test

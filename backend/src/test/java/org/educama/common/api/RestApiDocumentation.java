@@ -3,17 +3,20 @@ package org.educama.common.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.ArrayUtils;
 import org.camunda.bpm.engine.runtime.CaseExecution;
+import org.camunda.bpm.engine.runtime.CaseInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.educama.EducamaApplication;
 import org.educama.customer.api.CustomerController;
 import org.educama.customer.model.Address;
 import org.educama.customer.model.Customer;
+import org.educama.customer.repository.CustomerRepository;
+import org.educama.enums.Status;
 import org.educama.shipment.api.ShipmentController;
 import org.educama.shipment.process.ShipmentCaseConstants;
+import org.educama.shipment.repository.InvoiceRepository;
+import org.educama.shipment.repository.ShipmentRepository;
 import org.json.JSONObject;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,6 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -62,6 +66,15 @@ public class RestApiDocumentation {
 
     @Autowired
     private WebApplicationContext context;
+
+    @Autowired
+    private ShipmentRepository shipmentRepository;
+
+    @Autowired
+    private InvoiceRepository invoiceRepository;
+
+    @Autowired
+    private CustomerRepository customerRepository;
 
     private Customer customerOne;
 
@@ -147,7 +160,8 @@ public class RestApiDocumentation {
                 fieldWithPath("shipmentFlight.destinationAirport").description("The destination airport of the flight"),
                 fieldWithPath("shipmentFlight.departureTime").description("The time when the flight starts"),
                 fieldWithPath("shipmentFlight.destinationTime").description("The time when the flight lands"),
-                fieldWithPath("shipmentFlight.price").description("The price of the flight")
+                fieldWithPath("shipmentFlight.price").description("The price of the flight"),
+                fieldWithPath("status").description("The status of the shipment " + Status.values())
         };
 
         // Active Task Resource
@@ -261,6 +275,27 @@ public class RestApiDocumentation {
 
         };
 
+    }
+
+    @After
+    public void cleanup() {
+
+        processEngine().close();
+
+        Collection<CaseInstance> caseExecutionCollection = processEngine()
+                .getCaseService()
+                .createCaseInstanceQuery()
+                .active()
+                .list();
+
+        for (CaseInstance caseInstance:caseExecutionCollection) {
+            processEngine().getCaseService().terminateCaseExecution(caseInstance.getId());
+            processEngine().getCaseService().closeCaseInstance(caseInstance.getId());
+        }
+
+        shipmentRepository.deleteAll();
+        customerRepository.deleteAll();
+        invoiceRepository.deleteAll();
     }
 
     @Test
