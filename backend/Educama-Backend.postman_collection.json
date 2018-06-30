@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "c5e31c63-42ef-4856-8668-4ce0668bc405",
 		"name": "Educama-Backend",
+		"_postman_id": "153c0546-8ad5-cc23-eb3c-065dfc9f0dd3",
+		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Customers",
-			"description": null,
 			"item": [
 				{
 					"name": "Create Customer",
@@ -263,7 +263,6 @@
 		},
 		{
 			"name": "Shipments",
-			"description": null,
 			"item": [
 				{
 					"name": "Create Shipment",
@@ -472,12 +471,38 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Trigger Milestone Flight Departed",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8081/educama/v1/shipments/flightDeparted/fad9fcb2-e91f-4aa4-aa88-3ed5e2055248",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"educama",
+								"v1",
+								"shipments",
+								"flightDeparted",
+								"fad9fcb2-e91f-4aa4-aa88-3ed5e2055248"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "Tasks",
-			"description": null,
 			"item": [
 				{
 					"name": "List All Tasks",
