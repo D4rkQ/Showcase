@@ -115,6 +115,7 @@ export class ShipmentCapturePageComponent implements OnInit, OnDestroy {
     shipment.shipmentCargo = saveShipmentEvent.shipmentCargo;
     shipment.shipmentServices = saveShipmentEvent.shipmentServices;
     shipment.trackingId = saveShipmentEvent.trackingId;
+    shipment.status = "UNDEFINED";
     shipment.shipmentFlight = null;
 
     return shipment;

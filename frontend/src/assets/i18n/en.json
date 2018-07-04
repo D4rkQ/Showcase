@@ -105,5 +105,6 @@
   "SHIPMENT_ORDER_INCOMPLETE" : "Shipment order incomplete",
   "SHIPMENT_ORDER_COMPLETED" : "Shipment order completed",
   "FLIGHT_DEPARTED" : "Flight departed",
-  "SHIPMENT_COMPLETED" : "Shipment completed"
+  "SHIPMENT_COMPLETED" : "Shipment completed",
+  "UNDEFINED" : "Undefined"
 }

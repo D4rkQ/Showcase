@@ -15,6 +15,7 @@ import org.educama.customer.model.Address;
 import org.educama.customer.model.Customer;
 import org.educama.customer.repository.CustomerRepository;
 import org.educama.enums.ClientType;
+import org.educama.enums.Status;
 import org.educama.shipment.model.Cargo;
 import org.educama.shipment.model.Flight;
 import org.educama.shipment.model.Services;
@@ -82,6 +83,7 @@ public class ShipmentCaseModelTest extends AbstractProcessEngineRuleTest {
         shipment.shipmentCargo = new Cargo(null, 2.0, 123.0, "Don't Panic!", true);
         shipment.shipmentServices = new Services(false, false, false, true, false, false, true);
         shipment.shipmentFlight = new Flight("10243", "LH", "FRA", "STR", "2015-06-02T21:34:33.616Z", "2015-06-02T21:34:33.616Z", 100.12);
+        shipment.status = Status.UNDEFINED;
         shipmentRepository.save(shipment);
 
         this.shipmentId = shipment.getId();

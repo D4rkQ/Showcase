@@ -327,7 +327,8 @@ public class RestApiDocumentation {
                                 fieldWithPath("shipmentFlight.destinationAirport").description("The destination airport of the flight"),
                                 fieldWithPath("shipmentFlight.departureTime").description("The time when the flight starts"),
                                 fieldWithPath("shipmentFlight.destinationTime").description("The time when the flight lands"),
-                                fieldWithPath("shipmentFlight.price").description("The price of the flight")),
+                                fieldWithPath("shipmentFlight.price").description("The price of the flight"),
+                                fieldWithPath("status").description("The status of the shipment")),
                         responseFields(fieldDescriptorShipmentResource)));
     }
 
@@ -723,6 +724,7 @@ public class RestApiDocumentation {
         flight.put("destinationTime", "2015-06-02T21:34:33.616Z");
         flight.put("price", FLIGHTPRICE);
         shipment.put("shipmentFlight", flight);
+        shipment.put("status", Status.SHIPMENT_ORDER_COMPLETED);
 
         return shipment;
     }
@@ -820,6 +822,7 @@ public class RestApiDocumentation {
         flight.put("destinationTime", "2015-06-02T21:34:33.616Z");
         flight.put("price", FLIGHTPRICE);
         shipment.put("shipmentFlight", flight);
+        shipment.put("status", Status.SHIPMENT_ORDER_INCOMPLETE);
 
         return shipment;
     }
